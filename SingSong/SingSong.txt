@@ -1,0 +1,90 @@
+package com.github.demo01;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+public class SingSong {
+	public class Song {
+		private String songName;
+		private String singer;
+		private double time;
+		public Song(String songName, String singer, double time) {
+			super();
+			this.setSongName(songName);
+			this.setSinger(singer);
+			this.setTime(time);
+		}
+		public String getSinger() {
+			return singer;
+		}
+		public void setSinger(String singer) {
+			this.singer = singer;
+		}
+		public String getSongName() {
+			return songName;
+		}
+		public void setSongName(String songName) {
+			this.songName = songName;
+		}
+		public double getTime() {
+			return time;
+		}
+		public void setTime(double time) {
+			this.time = time;
+		}
+	}
+	public class Master {
+		List <Song> listsong=new LinkedList<Song>();
+		public Master() {
+			super();
+			// TODO 自动生成的构造函数存根
+		}
+		public boolean play() {
+			return false;
+		}
+	}
+	public class Player{
+		public boolean addSong(List<Song>listsong) {
+			return true;
+		}
+	}
+	public class SongDrive{
+		public Master master;    //主持人
+		public Player player;    //点歌的
+		public SongDrive(Master master, Player player) {
+			super();
+			this.master = master;
+			this.player = player;
+		}
+	}
+	public static void main(String[] args) {
+		// TODO 自动生成的方法存根
+		SingSong ss=new SingSong();
+		Song song= ss.new Song(null, null, 0);
+		Player player1 = ss.new Player();
+		Master master1=ss.new Master();
+		Scanner sc =new Scanner(System.in);
+		//玩家点歌
+		while(player1.addSong(master1.listsong)){
+			System.out.println("请输入歌曲的名字");
+			song.setSongName(sc.next());
+			System.out.println("请输入歌手");
+			song.setSinger(sc.next());
+			System.out.println("请输入歌曲的时长");
+			song.setTime(sc.nextDouble());
+			master1.listsong.add(song);
+			System.out.println("请输入是否继续添加歌曲：1.是     2。否");
+			int m =sc.nextInt();
+			if(m!=1) break; 
+		}
+		//歌单列表
+		Iterator<Song> it =master1.listsong.iterator();
+		while(it.hasNext()){
+			Song s1 = (Song) it.next();
+			System.out.println(s1.getSongName()+" "+s1.getSinger()+" "+s1.getTime());
+		}
+	}
+
+}
